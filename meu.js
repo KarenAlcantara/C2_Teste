@@ -18,12 +18,12 @@ function comecar () {
     cores = cores.join(', ') 
 
     while (tentativas != 0) {   
-        promptUsuario = prompt(`Eu estou pensando em uma dessas cores:\n\n"${corSelecionada.toString()}"\n\nQual cor eu estou pensando?\n\nVidas: ${tentativas}`).toLowerCase()
+        promptUsuario = prompt(`Eu estou pensando em uma dessas cores:\n\n"${cores.toString()}"\n\nQual cor eu estou pensando?\n\nVidas: ${tentativas}`).toLowerCase()
 
         if (promptUsuario.length === 0 || !promptUsuario.trim()) { 
             alert('Por favor, digite uma cor!!')
         } 
-        else if (!corSelecionada.includes(promptUsuario)) { 
+        else if (!cores.includes(promptUsuario)) { 
             alert('Essa cor não está entre as 10 possiveis ou não existe!\n\nTente novamente')
         } 
         else if (promptUsuario != corSelecionada) { 
@@ -39,7 +39,7 @@ function comecar () {
     function dicas(x,y,v) { 
         if (x.charCodeAt(0) > y.charCodeAt(0)) {
             if (v == 1) {
-                alert('Você perdeu! \n\nA correta era: "${x}"\n\n')
+                alert(`Você perdeu! \n\nA correta era:´${corSelecionada})
             } else {
                 alert('Resposta Errada\n\nDica é\n Sua cor é alfabéticamente menor que a minha\n\nTente novamente!')
             }
