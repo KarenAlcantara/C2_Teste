@@ -1,5 +1,5 @@
-document.getElementById('butao').addEventListener('click', comecar)
-import {color} from "./colors.js";
+document.getElementById('jogar').addEventListener('click', comecar)
+import {color} from "./color.js";
 
 function comecar () {
     var coresCSS = color()
@@ -7,48 +7,44 @@ function comecar () {
     var corSelecionada = ''
     var promptUsuario = ''
     var tentativas = 3
-    var res = document.querySelector('p#res')
 
-    while (cores.length != 10) { //sortea 10 valores e adiciona no vetor
+    while (cores.length != 10) {
         cores.push(coresCSS[Math.floor((Math.random() * coresCSS.length) + 1)].toLowerCase())
-        cores = [...new Set(cores)] //remove valores duplicados
-        cores.sort() //ordena o vetor em ordem alfabética
+        cores = [...new Set(cores)] 
+        cores.sort() 
     }
-    corSelecionada = cores[Math.floor((Math.random() * cores.length) + 1)] //adiciona uma cor aleatoria na variavel
+    corSelecionada = cores[Math.floor((Math.random() * cores.length) + 1)] 
 
-    cores = cores.join(', ') //adiciona espaço entre os valores no vetor
+    cores = cores.join(', ') 
 
     while (tentativas != 0) {   
         promptUsuario = prompt(`Eu estou pensando em uma dessas cores:\n\n"${corSelecionada.toString()}"\n\nQual cor eu estou pensando?\n\nVidas: ${tentativas}`).toLowerCase()
 
-        if (promptUsuario.length === 0 || !promptUsuario.trim()) { //verifica se o usuário não digitou a cor
+        if (promptUsuario.length === 0 || !promptUsuario.trim()) { 
             alert('Por favor, digite uma cor!!')
         } 
-        else if (!corSelecionada.includes(promptUsuario)) { //verificar se a cor existe 
+        else if (!corSelecionada.includes(promptUsuario)) { 
             alert('Essa cor não está entre as 10 possiveis ou não existe!\n\nTente novamente')
         } 
-        else if (promptUsuario != corSelecionada) { //verifica se o usuário acertou o valor ou não
-            compararString(corSelecionada, promptUsuario, tentativas)
+        else if (promptUsuario != corSelecionada) { 
+            dicas(corSelecionada, promptUsuario, tentativas)
             tentativas--
         } 
         else if (promptUsuario == corSelecionada){
-            alert('Parabéns, você acertou!!')
-            document.body.style.backgroundColor = promptUsuario //muda a cor de fundo para a cor acertada
-            res.innerHTML = 'Obrigado por jogar!!!'
+            alert('Você Ganhou!!')
             tentativas = 0
         }
     }
 
-    function compararString(x,y,v) { //verificar a possição da cor esclhida para usuário para dar a dica
+    function dicas(x,y,v) { 
         if (x.charCodeAt(0) > y.charCodeAt(0)) {
             if (v == 1) {
-                alert(`Desculpe, mas suas vidas acabaram!\n\nA correta era: "${x}"\n\nObrigado por jogar!!!`)
-                res.innerHTML = 'Atualize a página ou dê um F5 para jogar novamente.'
+                alert('Você perdeu! \n\nA correta era: "${x}"\n\n')
             } else {
-                alert('Você errou!!\n\nDica: Sua cor é alfabéticamente menor que a minha\n\nPor favor, tente novamente!')
+                alert('Resposta Errada\n\nDica é\n Sua cor é alfabéticamente menor que a minha\n\nTente novamente!')
             }
         } else {
-            alert('Você errou!!\n\nDica: Sua cor é alfabéticamente maior que a minha\n\nPor favor, tente novamente!')
+            alert('Resposta Errada\n\nDica é Sua cor é alfabéticamente maior que a minha\n\nTente novamente!')
         }
     }
 }
