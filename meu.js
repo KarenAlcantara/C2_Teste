@@ -39,7 +39,8 @@ function comecar () {
     function dicas(x,y,v) { 
         if (x.charCodeAt(0) > y.charCodeAt(0)) {
             if (v == 1) {
-                alert(`Você perdeu! \n\nA correta era:´${corSelecionada})
+                alert(`Você perdeu! \n\nA correta era:\n${x}`)
+                alert()
             } else {
                 alert('Resposta Errada\n\nDica é\n Sua cor é alfabéticamente menor que a minha\n\nTente novamente!')
             }
